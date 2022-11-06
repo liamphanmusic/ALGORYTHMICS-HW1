@@ -5,19 +5,15 @@ def read_reference_text(filename: str) -> list[list[str]]:
     line = f.readlines()
     line = [re.split("[ ,;:\’\"\?!.]+", l) for l in line]
     line = [line[:-1] for line in line]
-    return line
+    line = [[line.lower() for line in line] for line in line]
     f.close()
+    return line
 
-print(read_reference_text("ref-sentences.txt"))
 
 def make_word_vector(w: str, txt: list[list[str]]) -> dict[str, int]:
-    
 
 
+w = ["spain", "anchovy","france", "internet", "china", "mexico", "fish", "industry", "agriculture", "fishery", "tuna", "transport", "italy", "web", "communication", "labour", "fish", "cod"]
+txt = read_reference_text("ref-sentences.txt")
 
-
-
-
-def sim_word_vec(v1: dict[str, int], v2: dict[str, int]) -> float:
-
-
+print(make_word_vector(w,txt))
