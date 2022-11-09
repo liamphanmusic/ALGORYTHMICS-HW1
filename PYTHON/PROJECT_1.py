@@ -47,19 +47,15 @@ def make_word_vector(w: str, txt: list[list[str]]) -> dict[str, int]:
 def product(v1: dict[str, int], v2: dict[str, int]) -> float:
     sp = 0.0
     for word in v1:
-        sp += v1[word] * v2.get(word,0) # word not in v2 -> 0
+        sp += v1[word] * v2.get(word,0)
     return sp
 
 
-def similarity (s1: str, s2: str) -> float :
+def similarity(s1: str, s2: str) -> float:
     d1 = make_word_vector(s1,txt)
     d2 = make_word_vector(s2,txt)
     return product(d1, d2)/(math.sqrt(product(d1, d1)*product(d2, d2)))
 
-
-print(similarity("canada","switzerland"))
-print(similarity("canada","car"))
-print(similarity("canada","flood"))
 
 
 
