@@ -17,3 +17,4 @@ w = ["spain", "anchovy","france", "internet", "china", "mexico", "fish", "indust
 txt = read_reference_text("ref-sentences.txt")
 
 print(make_word_vector(w,txt))
+
