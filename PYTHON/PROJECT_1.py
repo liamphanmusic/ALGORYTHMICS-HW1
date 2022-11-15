@@ -57,6 +57,6 @@ def similarity(s1: str, s2: str) -> float:
     return product(d1, d2)/(math.sqrt(product(d1, d1)*product(d2, d2)))
 
 
-
+print(similarity("canada","car"))
 
 
