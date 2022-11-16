@@ -29,12 +29,12 @@ def make_word_vector(w: str, txt: list[list[str]]) -> dict[str, int]:
     :param txt: the reference text (ref-sentences.txt)
     :return: a dictionary providing all words frequency found in the same context as w (the word)
     """
-    content_copy = copy.deepcopy(txt)
     dict = {}
-    for sentence in content_copy:
+    for sentence in txt:
         if w in sentence:
-            sentence.pop(sentence.index(w))
-            temporary = set(sentence)
+            sentence_1 = copy.copy(sentence)
+            sentence_1.pop(sentence_1.index(w))
+            temporary = set(sentence_1)
             for word in temporary:
                 if word in dict.keys():
                     dict[word] = dict[word] + 1
