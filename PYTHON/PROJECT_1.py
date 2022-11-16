@@ -84,10 +84,11 @@ def main(word_list:list[str]):
 # OUTPUT ---------------------------
 
 # Sample Output
-word_list = ["canada", "disaster", "flood", "car", "road", "train", "rail", "germany", "switzerland", "technology", "industry", "conflict"]
-#main(word_list) # remove hashtag to run this one
+word_list_+ = ["canada", "disaster", "flood", "car", "road", "train", "rail", "germany", "switzerland", "technology", "industry", "conflict"]
 
 # To Do
 word_list_2 = ["spain", "anchovy","france", "internet", "china", "mexico", "fish", "industry", "agriculture", "fishery", "tuna", "transport", "italy", "web", "communication", "labour", "fish", "cod"]
-main(word_list_2) # add hashtag to not run this one
+
+
+main(word_list_1)
 
