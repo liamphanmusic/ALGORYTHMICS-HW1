@@ -23,7 +23,6 @@ def read_reference_text(filename: str, stopwords: list[str]) -> list[list[str]]:
     f.close()
     return line
 
-txt = read_reference_text("ref-sentences.txt",stopwords)
 
 def make_word_vector(w: str, txt: list[list[str]]) -> dict[str, int]:
     """
@@ -57,32 +56,35 @@ def product(v1: dict[str, int], v2: dict[str, int]) -> float:
     return sp
 
 
-def similarity(s1: str, s2: str) -> float:
+def similarity(s1: str, s2: str, reference_text: list[list[str]]) -> float:
     """
     :param s1: The Word 1 as string
     :param s2: The Word 2 as string
     :return: Similarity between both Words in range 0 and 1 (as float)
     """
-    d1 = make_word_vector(s1,txt)
-    d2 = make_word_vector(s2,txt)
+    d1 = make_word_vector(s1,reference_text)
+    d2 = make_word_vector(s2,reference_text)
     return product(d1, d2)/(math.sqrt(product(d1, d1)*product(d2, d2)))
 
 
 # MAIN FUNCTION -------------------------------------------------------------
 
 
-def main(word_list:list[str]):
+def main(word_list:list[str], stopwords:list[str], reference_text: str):
     """
     :param word_list: The Full List of Words we want to compare similarity
     :return: printing the result for the Full List of Words, only the maximum similarity combination
     """
+
+    reference = read_reference_text(reference_text,stopwords)
+
     for i in range(len(word_list)):
         max_sim = 0
         for j in range(len(word_list)):
             if j == i:
                 continue
             else:
-                sim = similarity(word_list[i], word_list[j])
+                sim = similarity(word_list[i], word_list[j], reference)
                 if sim>max_sim:
                     max_sim=sim
                     j_pos = j
@@ -98,5 +100,5 @@ word_list_1 = ["canada", "disaster", "flood", "car", "road", "train", "rail", "g
 word_list_2 = ["spain", "anchovy","france", "internet", "china", "mexico", "fish", "industry", "agriculture", "fishery", "tuna", "transport", "italy", "web", "communication", "labour", "fish", "cod"]
 
 
-main(word_list_1)
+main(word_list_1, stopwords, "ref-sentences.txt")
 
