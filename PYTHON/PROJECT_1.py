@@ -5,12 +5,12 @@ import math
 import copy
 
 # ALL FUNCTIONS REQUIRED ------------------------------------------
-def read_reference_text(filename: str, stopwords: list[str]) -> list[list[str]]:
+def read_reference_text(filename: str, stopwords: list[str], encoding: "utf-8") -> list[list[str]]:
     """
     :param filename: Our Filename or direction if not in the root folder
     :return: a list of list of string with each word split in sentences
     """
-    f = open(filename)
+    f = open(filename, "r",encoding=encoding)
     line = f.readlines()
     line = [re.split("[ ,;:\’\"\?!]+", l) for l in line]
     line = [line[:-1] for line in line]
@@ -62,18 +62,20 @@ def similarity(s1: str, s2: str, reference_text: list[list[str]]) -> float:
     """
     d1 = make_word_vector(s1,reference_text)
     d2 = make_word_vector(s2,reference_text)
+
+
     return product(d1, d2)/(math.sqrt(product(d1, d1)*product(d2, d2)))
 
 
 # MAIN FUNCTION -------------------------------------------------------------
 
-def main(word_list:list[str], stopwords:list[str], reference_text: str):
+def similar_word_computation(word_list:list[str], stopwords:list[str], reference_text: str, encoding: "utf-8"):
     """
     :param word_list: The Full List of Words we want to compare similarity
     :return: printing the result for the Full List of Words, only the maximum similarity combination
     """
 
-    reference = read_reference_text(reference_text,stopwords)
+    reference = read_reference_text(reference_text,stopwords,encoding)
 
     for i in range(len(word_list)):
         max_sim = 0
@@ -101,6 +103,19 @@ word_list_2 = ["spain", "anchovy","france", "internet", "china", "mexico", "fish
 
 # COMPUTATIONS --------------------------------------------------------------
 
-# Use word_list_1 for Sample output or word_list_2 for To Do output
-main(word_list_1, stopwords, "ref-sentences.txt")
+def main():
+
+    print("\n---------------------------------------------------------------------------")
+    print("\n Computation for the Sample Output with Word List 1")
+    print("\n---------------------------------------------------------------------------")
+    similar_word_computation(word_list_1, stopwords, "ref-sentences.txt", encoding="utf-8")
+    print("\n---------------------------------------------------------------------------")
+    print("\n Computation for the To Do Output with Word List 2")
+    print("\n---------------------------------------------------------------------------")
+    similar_word_computation(word_list_2, stopwords, "ref-sentences.txt", encoding="utf-8")
+    print("\n-----------------------------END-------------------------------------------")
+
+
+if __name__ == "__main__":
+    main()
 
