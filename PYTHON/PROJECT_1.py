@@ -73,6 +73,7 @@ def main(word_list:list[str]):
     """
     for i in range(len(word_list)-1):
         max_sim = 0
+        j_pos = 0
         for j in range(i+1,len(word_list)):
             sim = similarity(word_list[i], word_list[j])
             if sim>max_sim:
@@ -80,15 +81,21 @@ def main(word_list:list[str]):
                 j_pos = j
         print(f'{word_list[i]} --> {word_list[j_pos]}, {max_sim}')
 
+def second(word_list:list[str]):
+    for i in range(len(word_list)-1):
+        for j in range(len(word_list)):
+            sim = similarity(word_list[i], word_list[j])
+            print(f'{word_list[i]} --> {word_list[j]}, {sim}')
+
 
 # OUTPUT ---------------------------
 
 # Sample Output
-word_list_+ = ["canada", "disaster", "flood", "car", "road", "train", "rail", "germany", "switzerland", "technology", "industry", "conflict"]
+word_list_1 = ["canada", "disaster", "flood", "car", "road", "train", "rail", "germany", "switzerland", "technology", "industry", "conflict"]
 
 # To Do
 word_list_2 = ["spain", "anchovy","france", "internet", "china", "mexico", "fish", "industry", "agriculture", "fishery", "tuna", "transport", "italy", "web", "communication", "labour", "fish", "cod"]
 
 
-main(word_list_1)
+second(word_list_1)
 
