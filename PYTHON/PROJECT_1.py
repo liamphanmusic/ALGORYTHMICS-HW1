@@ -1,3 +1,5 @@
+
+# IMPORT PACKAGES --------------------------------------------------
 import re
 import math
 import copy
@@ -8,8 +10,8 @@ stopwords = set(["s", "a", "about", "above", "above", "across", "after", "afterw
 # ALL FUNCTIONS REQUIRED ------------------------------------------
 def read_reference_text(filename: str, stopwords: list[str]) -> list[list[str]]:
     """
-    :param filename:
-    :return:
+    :param filename: Our Filename or direction if not in the root folder
+    :return: a list of list of string with each word split in sentences
     """
     f = open(filename)
     line = f.readlines()
@@ -59,11 +61,14 @@ def similarity(s1: str, s2: str) -> float:
     """
     :param s1: The Word 1 as string
     :param s2: The Word 2 as string
-    :return: Similarity between 0 and 1 as float
+    :return: Similarity between both Words in range 0 and 1 (as float)
     """
     d1 = make_word_vector(s1,txt)
     d2 = make_word_vector(s2,txt)
     return product(d1, d2)/(math.sqrt(product(d1, d1)*product(d2, d2)))
+
+
+# MAIN FUNCTION -------------------------------------------------------------
 
 
 def main(word_list:list[str]):
@@ -71,21 +76,17 @@ def main(word_list:list[str]):
     :param word_list: The Full List of Words we want to compare similarity
     :return: printing the result for the Full List of Words, only the maximum similarity combination
     """
-    for i in range(len(word_list)-1):
+    for i in range(len(word_list)):
         max_sim = 0
-        j_pos = 0
-        for j in range(i+1,len(word_list)):
-            sim = similarity(word_list[i], word_list[j])
-            if sim>max_sim:
-                max_sim=sim
-                j_pos = j
-        print(f'{word_list[i]} --> {word_list[j_pos]}, {max_sim}')
-
-def second(word_list:list[str]):
-    for i in range(len(word_list)-1):
         for j in range(len(word_list)):
-            sim = similarity(word_list[i], word_list[j])
-            print(f'{word_list[i]} --> {word_list[j]}, {sim}')
+            if j == i:
+                continue
+            else:
+                sim = similarity(word_list[i], word_list[j])
+                if sim>max_sim:
+                    max_sim=sim
+                    j_pos = j
+        print(f'{word_list[i]} --> {word_list[j_pos]}, {max_sim}')
 
 
 # OUTPUT ---------------------------
@@ -97,5 +98,5 @@ word_list_1 = ["canada", "disaster", "flood", "car", "road", "train", "rail", "g
 word_list_2 = ["spain", "anchovy","france", "internet", "china", "mexico", "fish", "industry", "agriculture", "fishery", "tuna", "transport", "italy", "web", "communication", "labour", "fish", "cod"]
 
 
-second(word_list_1)
+main(word_list_1)
 
