@@ -77,6 +77,7 @@ def similar_word_computation(word_list:list[str], stopwords:list[str], reference
 
     reference = read_reference_text(reference_text,stopwords,encoding)
 
+
     for i in range(len(word_list)):
         max_sim = 0
         for j in range(len(word_list)):
